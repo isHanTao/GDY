@@ -1,0 +1,441 @@
+.card {
+  border-radius: 10px;
+  padding: 5px;
+  width: 200px;
+  height: 310px;
+  position: relative;
+  margin: 2px;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .08);
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.card-1 {
+  background-image: url("1.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.card-1-tao::before {
+  content: "A♥";
+  position: absolute;
+  left: 50%;
+  bottom: 50px;
+  transform: translateX(-50%);
+  font-size: 40px;
+  font-weight: bolder;
+  color: red;
+}
+
+.card-1-fang::before {
+  content: "A♦";
+  position: absolute;
+  left: 50%;
+  bottom: 50px;
+  transform: translateX(-50%);
+  font-size: 40px;
+  font-weight: bolder;
+  color: red;
+}
+
+.card-1-heitao::before {
+  content: "A♠";
+  position: absolute;
+  left: 50%;
+  bottom: 50px;
+  transform: translateX(-50%);
+  font-size: 40px;
+  font-weight: bolder;
+  color: black;
+}
+
+.card-1-yinghua::before {
+  content: "A🌸";
+  position: absolute;
+  left: 50%;
+  bottom: 50px;
+  transform: translateX(-50%);
+  font-size: 40px;
+  font-weight: bolder;
+  color: black;
+}
+
+.card-1-tao::after {
+  content: "A♥";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 20px;
+  font-weight: bolder;
+  color: red;
+}
+
+.card-1-fang::after {
+  content: "A♦";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 20px;
+  font-weight: bolder;
+  color: red;
+}
+
+.card-1-heitao::after {
+  content: "A♠";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 20px;
+  font-weight: bolder;
+  color: black;
+}
+
+.card-1-yinghua::after {
+  content: "A🌸";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 20px;
+  font-weight: bolder;
+  color: black;
+}
+
+.card-2-tao::before {
+  content: "2♥";
+  position: absolute;
+  left: 50%;
+  bottom: 50px;
+  transform: translateX(-50%);
+  font-size: 40px;
+  font-weight: bolder;
+  color: red;
+}
+
+.card-2-fang::before {
+  content: "2♦";
+  position: absolute;
+  left: 50%;
+  bottom: 50px;
+  transform: translateX(-50%);
+  font-size: 40px;
+  font-weight: bolder;
+  color: red;
+}
+
+.card-2-heitao::before {
+  content: "2♠";
+  position: absolute;
+  left: 50%;
+  bottom: 50px;
+  transform: translateX(-50%);
+  font-size: 40px;
+  font-weight: bolder;
+  color: black;
+}
+
+.card-2-yinghua::before {
+  content: "2🌸";
+  position: absolute;
+  left: 50%;
+  bottom: 50px;
+  transform: translateX(-50%);
+  font-size: 40px;
+  font-weight: bolder;
+  color: black;
+}
+
+.card-2-tao::after {
+  content: "2♥";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 20px;
+  font-weight: bolder;
+  color: red;
+}
+
+.card-2-fang::after {
+  content: "2♦";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 20px;
+  font-weight: bolder;
+  color: red;
+}
+
+.card-2-heitao::after {
+  content: "2♠";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 20px;
+  font-weight: bolder;
+  color: black;
+}
+
+.card-2-yinghua::after {
+  content: "2🌸";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 20px;
+  font-weight: bolder;
+  color: black;
+}
+
+/*3 */
+.card-3-tao::before {
+  content: "3♥";
+  position: absolute;
+  left: 50%;
+  bottom: 50px;
+  transform: translateX(-50%);
+  font-size: 40px;
+  font-weight: bolder;
+  color: red;
+}
+
+.card-3-fang::before {
+  content: "3♦";
+  position: absolute;
+  left: 50%;
+  bottom: 50px;
+  transform: translateX(-50%);
+  font-size: 40px;
+  font-weight: bolder;
+  color: red;
+}
+
+.card-3-heitao::before {
+  content: "3♠";
+  position: absolute;
+  left: 50%;
+  bottom: 50px;
+  transform: translateX(-50%);
+  font-size: 40px;
+  font-weight: bolder;
+  color: black;
+}
+
+.card-3-yinghua::before {
+  content: "3🌸";
+  position: absolute;
+  left: 50%;
+  bottom: 50px;
+  transform: translateX(-50%);
+  font-size: 40px;
+  font-weight: bolder;
+  color: black;
+}
+
+.card-3-tao::after {
+  content: "3♥";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 20px;
+  font-weight: bolder;
+  color: red;
+}
+
+.card-3-fang::after {
+  content: "3♦";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 20px;
+  font-weight: bolder;
+  color: red;
+}
+
+.card-3-heitao::after {
+  content: "3♠";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 20px;
+  font-weight: bolder;
+  color: black;
+}
+
+.card-3-yinghua::after {
+  content: "3🌸";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 20px;
+  font-weight: bolder;
+  color: black;
+}
+/* 4 */
+.card-4-tao::before {
+  content: "4♥";
+  position: absolute;
+  left: 50%;
+  bottom: 50px;
+  transform: translateX(-50%);
+  font-size: 40px;
+  font-weight: bolder;
+  color: red;
+}
+
+.card-4-fang::before {
+  content: "4♦";
+  position: absolute;
+  left: 50%;
+  bottom: 50px;
+  transform: translateX(-50%);
+  font-size: 40px;
+  font-weight: bolder;
+  color: red;
+}
+
+.card-4-heitao::before {
+  content: "4♠";
+  position: absolute;
+  left: 50%;
+  bottom: 50px;
+  transform: translateX(-50%);
+  font-size: 40px;
+  font-weight: bolder;
+  color: black;
+}
+
+.card-4-yinghua::before {
+  content: "4🌸";
+  position: absolute;
+  left: 50%;
+  bottom: 50px;
+  transform: translateX(-50%);
+  font-size: 40px;
+  font-weight: bolder;
+  color: black;
+}
+
+.card-4-tao::after {
+  content: "4♥";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 20px;
+  font-weight: bolder;
+  color: red;
+}
+
+.card-4-fang::after {
+  content: "4♦";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 20px;
+  font-weight: bolder;
+  color: red;
+}
+
+.card-4-heitao::after {
+  content: "4♠";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 20px;
+  font-weight: bolder;
+  color: black;
+}
+
+.card-4-yinghua::after {
+  content: "4🌸";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 20px;
+  font-weight: bolder;
+  color: black;
+}
+/* 5 */
+.card-5-tao::before {
+  content: "5♥";
+  position: absolute;
+  left: 50%;
+  bottom: 50px;
+  transform: translateX(-50%);
+  font-size: 40px;
+  font-weight: bolder;
+  color: red;
+}
+
+.card-5-fang::before {
+  content: "5♦";
+  position: absolute;
+  left: 50%;
+  bottom: 50px;
+  transform: translateX(-50%);
+  font-size: 40px;
+  font-weight: bolder;
+  color: red;
+}
+
+.card-5-heitao::before {
+  content: "5♠";
+  position: absolute;
+  left: 50%;
+  bottom: 50px;
+  transform: translateX(-50%);
+  font-size: 40px;
+  font-weight: bolder;
+  color: black;
+}
+
+.card-5-yinghua::before {
+  content: "5🌸";
+  position: absolute;
+  left: 50%;
+  bottom: 50px;
+  transform: translateX(-50%);
+  font-size: 40px;
+  font-weight: bolder;
+  color: black;
+}
+
+.card-5-tao::after {
+  content: "5♥";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 20px;
+  font-weight: bolder;
+  color: red;
+}
+
+.card-5-fang::after {
+  content: "5♦";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 20px;
+  font-weight: bolder;
+  color: red;
+}
+
+.card-5-heitao::after {
+  content: "5♠";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 20px;
+  font-weight: bolder;
+  color: black;
+}
+
+.card-5-yinghua::after {
+  content: "5🌸";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 20px;
+  font-weight: bolder;
+  color: black;
+}
