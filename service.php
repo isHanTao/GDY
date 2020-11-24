@@ -7,11 +7,8 @@ require_once 'json.php';
 
     //监听WebSocket连接打开事件
     $ws->on('open', function ($ws, $request) use ($redis) {
-        $users = getAllUser($ws,$redis);
-        $ws->push($request->fd, (new Msg('欢迎你！',[],1))->json());
-        $ws->push($request->fd, (new Msg('',[
-            'users'=>$users
-        ],3))->json());
+        var_dump('user'.$request->fd .'进入');
+        $ws->push($request->fd, (new Msg('欢迎你！',[],1,['name'=>'Admin']))->json());
     });
 
     //监听WebSocket消息事件
@@ -19,13 +16,26 @@ require_once 'json.php';
         $data =  getMsg($frame);
         if ($data->getCode() == 2){
             $redis->set('user'.$frame->fd,json_encode($data->getData()['user']));
+            $users = getAllUser($ws,$redis);
+            sendToAll($ws,(new Msg('',[
+                'users'=>$users
+            ],3))->json());
         }
-        sendToOther($ws,$frame,$data->json());
+        if ($data->getCode() == 1){
+            $user = getUser($frame->fd,$redis);
+            $data->setFrom($user);
+            sendToOther($ws,$frame->fd,$data->json());
+        }
     });
 
     //监听WebSocket连接关闭事件
-    $ws->on('close', function ($ws, $fd) {
-        echo "client-{$fd} is closed";
+    $ws->on('close', function ($ws, $fd) use ($redis){
+        echo "client-{$fd} is closed".PHP_EOL;
+        $redis->del('user'.$fd);
+        $users = getAllUser($ws,$redis);
+        sendToAll($ws,(new Msg('',[
+            'users'=>$users
+        ],3))->json());
     });
     $ws->start();
 
@@ -35,27 +45,39 @@ require_once 'json.php';
      * @param $redis redis
      */
     function getAllUser($ws,$redis){
-        $keys = $redis->keys('name*');
+        $keys = $redis->keys('user*');
         var_dump($keys);
-        $clients = $redis->mget($keys);
         $users = [];
-        foreach ($clients as $cl){
-            $fd = str_replace('user','',$cl);
+        foreach ($keys as $key){
+            $fd = (int)str_replace('user','',$key);
             if (!$ws->isEstablished($fd)){
-                $redis->del($cl);
+                $redis->del($key);
             }else{
-                $users [] = json_decode($redis->get($cl));
+                $users [] = json_decode($redis->get($key));
             }
         }
         return $users;
     }
 
+    function getUser($fd,$redis){
+        $user = json_decode($redis->get('user'.$fd));
+        if (!$user){
+            $user = [
+                'name'=>'用户信息异常',
+                'avatar'=>'t1.png'
+            ];
+        }
+        if (is_object($user)){
+            $user = object_to_array($user);
+        }
+        return $user;
+    }
+
     // 将消息发送给被人
-    function sendToOther($ws, $frame, $data){
+    function sendToOther($ws, $ex, $data){
         foreach ($ws->connections as $fd)  {
             // 需要先判断是否是正确的websocket连接，否则有可能会push失败
-            if ($ws->isEstablished($fd) && $fd != $frame->fd) {
-                var_dump($frame->fd . 'push to' . $fd);
+            if ($ws->isEstablished($fd) && $fd != $ex) {
                 $ws->push($fd,$data);
             }
         }
@@ -63,7 +85,9 @@ require_once 'json.php';
     function sendToAll($ws, $data){
         foreach ($ws->connections as $fd) {
             // 需要先判断是否是正确的websocket连接，否则有可能会push失败
-            $ws->push($fd,$data);
+            if ($ws->isEstablished($fd)) {
+                $ws->push($fd,$data);
+            }
         }
     }
     function getMsg($frame){
@@ -119,7 +143,7 @@ require_once 'json.php';
         private $from;
         private $to;
         private $code;
-        public function __construct($msg = '',$data = [], $code=1,$from = 0,$to = 0)
+        public function __construct($msg = '',$data = [], $code=1,$from = [],$to = 0)
         {
             $this->msg = $msg;
             $this->data = $data;
@@ -128,7 +152,7 @@ require_once 'json.php';
             $this->to = $to;
         }
         public function json(){
-            return json_encode(['code'=>$this->code,'msg'=>$this->msg,'data'=>$this->data]);
+            return json_encode(['code'=>$this->code,'msg'=>$this->msg,'data'=>$this->data,'from'=>$this->from]);
         }
 
         /**
@@ -164,17 +188,17 @@ require_once 'json.php';
         }
 
         /**
-         * @return int
+         * @return array
          */
-        public function getFrom(): int
+        public function getFrom(): array
         {
             return $this->from;
         }
 
         /**
-         * @param int $from
+         * @param array $from
          */
-        public function setFrom(int $from): void
+        public function setFrom(array $from): void
         {
             $this->from = $from;
         }

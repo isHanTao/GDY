@@ -32,16 +32,15 @@
         var templateResponse = Handlebars.compile($("#message-response-template").html());
         var contextResponse = {
           response: chat.messageResponses,
-          time: chat.getCurrentTime()
+          time: chat.getCurrentTime(),
+          name:data.from.name
         };
         chat.$chatHistoryList.append(templateResponse(contextResponse));
         chat.scrollToBottom()
       } else if (data.code === 2) {
         chat.addUser(data.data.user)
       }else if (data.code === 3) {
-        for (let i = 0; i < data.data.users; i++) {
-          chat.addUser(data.data.users[i])
-        }
+        chat.addUser(data.data.users)
       }
 
     };
@@ -99,16 +98,20 @@
       getCurrentTime: function () {
         return new Date().toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3");
       },
-      addUser: function (user) {
-        const userHTML = `<li class="clearfix">
-                <img src="img/${user.avatar}" alt="avatar" />
+      addUser: function (users) {
+        this.people.empty()
+        let userHTML = ''
+        for (let i = 0; i < users.length; i++) {
+           userHTML += `<li class="clearfix">
+                <img src="img/${users[i].avatar}" alt="avatar" />
                 <div class="about">
-                    <div class="name">${user.name}</div>
+                    <div class="name">${users[i].name}</div>
                     <div class="status">
-                        <i class="fa fa-circle offline"></i> offline
+                        <i class="fa fa-circle online"></i> online
                     </div>
                 </div>
               </li>`
+        }
         this.people.append(userHTML)
       }
     };
@@ -129,7 +132,7 @@
         });
       }
     };
-    searchFilter.init();
+    // searchFilter.init();
   } else {
     window.alert('你的名字无效')
     location.reload()
