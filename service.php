@@ -180,6 +180,54 @@ function object_to_array($obj)
     return $obj;
 }
 
+class Poker{
+    // 唯一房间号
+    private $name;
+    private $num = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+    private $icon = ['♥' => 'red', '♦' => 'red', '♠' => 'black', '♣' => 'black'];
+    private $index = 0;
+    private $poker;
+    private $redis;
+
+    /**
+     * Poker constructor.
+     * @param $name
+     * @param $redis redis
+     */
+    public function __construct($name, $redis)
+    {
+        $this->name = $name;
+        $this->redis = $redis;
+        return $this;
+    }
+
+    public function create(){
+        foreach ($this->icon as $iconkey => $iconvalue) {
+            foreach ($this->num as $value) {
+                $poker[] = "<span style='color:$iconvalue'> {$value} {$iconkey}</span>";
+                $poker[] = "<span style='color:$iconvalue'> {$value} {$iconkey}</span>";
+            }
+        }
+        $this->poker = shuffle($poker);  //打乱数组
+        $this->redis->set('room' . $this->name,json_encode($this->poker));
+        return $this;
+    }
+
+    public function getCard($num){
+        if (count($this->poker) < $this->index + $num){
+            $this->index += $num;
+            return array_slice($this->poker,$this->index,$num);
+        }else{
+            return false;
+        }
+    }
+
+    public function getPoker(){
+        return json_decode($this->poker);
+    }
+}
+
+
 class Msg
 {
     private $msg;
