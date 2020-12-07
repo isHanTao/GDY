@@ -227,6 +227,27 @@ class Poker{
     }
 }
 
+class Room{
+    private $poker;
+    private $users;
+
+    /**
+     * Room constructor.
+     * @param array $users
+     * @param $id
+     * @param $redis redis
+     */
+    public function __construct(array $users,$id,$redis)
+    {
+        $this->poker = new Poker('room'.$id,$redis);
+        $this->users = $users;
+    }
+
+    public function getNext(){
+        return $this->poker->getCard(1);
+    }
+}
+
 
 class Msg
 {
